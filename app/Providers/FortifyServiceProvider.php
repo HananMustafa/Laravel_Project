@@ -15,11 +15,11 @@ class FortifyServiceProvider extends ServiceProvider
             return view('auth.register');
         });
         // Use the CreateNewUser action class to handle registration
-        Fortify::createUsersUsing(CreateNewUser::class);
+        Fortify::createUsersUsing(\App\Actions\Fortify\CreateNewUser::class);
 
 
 
-        
+
         // Register the view for login
         Fortify::loginView(function () {
             return view('auth.login');

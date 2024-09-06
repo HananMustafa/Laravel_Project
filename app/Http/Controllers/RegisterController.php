@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/RegisterController.php
 
 namespace App\Http\Controllers;
 
@@ -10,29 +9,23 @@ use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
-    public function showRegistrationForm()
+    public function create(Request $request)
     {
-        return view('register');
-    }
-
-    public function register(Request $request)
-    {
+        // Validation logic
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        // Create and save user
         User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        // Optionally redirect to login or dashboard after registration
-        return redirect()->route('login');
+        // Redirect to a desired page (like a dashboard)
+        return redirect()->route('home');
     }
 }
-
-
-?>

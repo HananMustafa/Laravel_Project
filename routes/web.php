@@ -18,7 +18,13 @@ if (Features::enabled(Features::registration())) {
     Route::get('/register', function () {
         return view('auth.register');
     })->name('register');
+
+    // This is the route that handles the form POST submission
+    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register');
+
 }
+
+
 
 
 Route::get('/login', function () {
