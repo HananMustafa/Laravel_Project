@@ -30,6 +30,14 @@ if (Features::enabled(Features::registration())) {
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+// Fortify login route
+Route::post('/login', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'store'])->name('login');
+
+
+// Logout route
+Route::post('/logout', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+
 
 // Home Route (Requires user to be authenticated)
 Route::middleware(['auth'])->get('/home', function () {

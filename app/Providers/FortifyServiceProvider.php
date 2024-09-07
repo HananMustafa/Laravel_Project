@@ -24,6 +24,19 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::loginView(function () {
             return view('auth.login');
         });
+
+
+
+
+        // Customize login redirection
+        // Fortify::authenticateUsing(function ($request) {
+        //     return redirect('/home'); // Redirect to home after login
+        // });
+        
+        // Customize logout redirection
+        // Fortify::logout(function ($request) {
+        //     return redirect('/'); // Redirect to welcome page after logout
+        // });
         
     }
 }

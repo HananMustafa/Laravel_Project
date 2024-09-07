@@ -1,5 +1,4 @@
 <!-- resources/views/auth/login.blade.php -->
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +6,17 @@
 </head>
 <body>
     <h1>Login</h1>
+
+    <!-- Display any validation errors -->
+    @if ($errors->any())
+        <div>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
