@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Fortify\Fortify;
+use Illuminate\Http\Request; //For Password Reset
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -38,5 +39,16 @@ class FortifyServiceProvider extends ServiceProvider
         //     return redirect('/'); // Redirect to welcome page after logout
         // });
         
-    }
+
+
+        // Forgot Password View
+        Fortify::requestPasswordResetLinkView(function () {
+            return view('auth.forgot-password');
+        });
+
+        // Reset Password View
+        Fortify::resetPasswordView(function (Request $request) {
+            return view('auth.reset-password', ['request' => $request]);
+        });
+        }
 }

@@ -43,3 +43,30 @@ Route::post('/logout', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionCo
 Route::middleware(['auth'])->get('/home', function () {
     return view('home'); // this is your new home view
 })->name('home');
+
+
+
+
+
+
+
+
+
+
+// Password Reset Routes
+
+// Forgot Password view
+Route::get('/forgot-password', function () {
+    return view('auth.forgot-password');
+})->middleware('guest')->name('password.request');
+
+// Send Password Reset Link
+Route::post('/forgot-password', [\Laravel\Fortify\Http\Controllers\PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.email');
+
+// Password Reset View
+Route::get('/reset-password/{token}', function ($token) {
+    return view('auth.reset-password', ['token' => $token]);
+})->middleware('guest')->name('password.reset');
+
+// Reset the Password
+Route::post('/reset-password', [\Laravel\Fortify\Http\Controllers\NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
