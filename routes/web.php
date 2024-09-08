@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -64,9 +65,9 @@ Route::get('/forgot-password', function () {
 Route::post('/forgot-password', [\Laravel\Fortify\Http\Controllers\PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.email');
 
 // Password Reset View
-Route::get('/reset-password/{token}', function ($token) {
-    return view('auth.reset-password', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+Route::get('/reset-password/{token}', function (Request $request) {
+    return view('auth.reset-password', ['request' => $request]);
+})->name('password.reset');
 
 // Reset the Password
 Route::post('/reset-password', [\Laravel\Fortify\Http\Controllers\NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');

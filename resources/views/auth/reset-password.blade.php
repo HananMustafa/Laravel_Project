@@ -9,27 +9,36 @@
 
     <form method="POST" action="{{ route('password.update') }}">
         @csrf
-
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <label for="email">Email Address</label>
-        <input id="email" type="email" name="email" value="{{ $request->email }}" required autofocus>
-        
-        @error('email')
-            <span class="text-red-600">{{ $message }}</span>
-        @enderror
-
-        <label for="password">New Password</label>
-        <input id="password" type="password" name="password" required>
-        
-        @error('password')
-            <span class="text-red-600">{{ $message }}</span>
-        @enderror
-
-        <label for="password_confirmation">Confirm Password</label>
-        <input id="password_confirmation" type="password" name="password_confirmation" required>
-
-        <button type="submit">Reset Password</button>
+    
+        <!-- Token -->
+        <input type="hidden" name="token" value="{{ request()->route('token') }}">
+    
+        <!-- Email Address -->
+        <div>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" value="{{ request()->input('email') }}" required autofocus>
+        </div>
+    
+        <!-- Password -->
+        <div>
+            <label for="password">New Password</label>
+            <input id="password" type="password" name="password" required>
+        </div>
+    
+        <!-- Confirm Password -->
+        <div>
+            <label for="password_confirmation">Confirm New Password</label>
+            <input id="password_confirmation" type="password" name="password_confirmation" required>
+        </div>
+    
+        <!-- Submit Button -->
+        <div>
+            <button type="submit">
+                Reset Password
+            </button>
+        </div>
     </form>
+    
+    
 </body>
 </html>
