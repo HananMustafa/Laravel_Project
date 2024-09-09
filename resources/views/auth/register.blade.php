@@ -26,6 +26,11 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
+
+        @error('password')
+            {{$message}}
+        @enderror
+
         <div class="field">
             <label for="password_confirmation">Confirm Password:</label>
             <input type="password" id="password_confirmation" name="password_confirmation" required>

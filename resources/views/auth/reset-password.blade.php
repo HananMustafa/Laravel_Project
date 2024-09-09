@@ -7,7 +7,7 @@
 <body>
     <h1>Reset Password</h1>
 
-    <form method="POST" action="{{ route('password.update') }}">
+    <form method="POST" action="{{ url('/reset-password') }}">
         @csrf
     
         <!-- Token -->

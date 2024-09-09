@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Laravel\Fortify\Features;
 
 
-use Laravel\Fortify\Http\Controllers\PasswordResetLinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,28 +15,28 @@ Route::get('/', function () {
 });
 
 // Fortify routes for registration
-if (Features::enabled(Features::registration())) {
-    Route::get('/register', function () {
-        return view('auth.register');
-    })->name('register');
+// if (Features::enabled(Features::registration())) {
+//     Route::get('/register', function () {
+//         return view('auth.register');
+//     })->name('register');
 
-    // This is the route that handles the form POST submission
-    Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register');
+//     // This is the route that handles the form POST submission
+//     Route::post('/register', [\Laravel\Fortify\Http\Controllers\RegisteredUserController::class, 'store'])->name('register');
 
-}
-
-
+// }
 
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
-// Fortify login route
-Route::post('/login', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'store'])->name('login');
+
+
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
+// // Fortify login route
+// Route::post('/login', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'store'])->name('login');
 
 
 // Logout route
-Route::post('/logout', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy'])->name('logout');
+// Route::post('/logout', [\Laravel\Fortify\Http\Controllers\AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
 
 
@@ -53,23 +51,20 @@ Route::middleware(['auth'])->get('/home', function () {
 
 
 
-
-
-
 // Password Reset Routes
 
 // Forgot Password view
-Route::get('/forgot-password', function () {
-    return view('auth.forgot-password');
-})->middleware('guest')->name('password.request');
+// Route::get('/forgot-password', function () {
+//     return view('auth.forgot-password');
+// })->middleware('guest')->name('password.request');
 
-// Send Password Reset Link
-Route::post('/forgot-password', [\Laravel\Fortify\Http\Controllers\PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.email');
+// // Send Password Reset Link
+// Route::post('/forgot-password', [\Laravel\Fortify\Http\Controllers\PasswordResetLinkController::class, 'store'])->middleware('guest')->name('password.email');
 
-// Password Reset View
-Route::get('/reset-password/{token}', function (Request $request) {
-    return view('auth.reset-password', ['request' => $request]);
-})->name('password.reset');
+// // Password Reset View
+// Route::get('/reset-password/{token}', function (Request $request) {
+//     return view('auth.reset-password', ['request' => $request]);
+// })->name('password.reset');
 
-// Reset the Password
-Route::post('/reset-password', [\Laravel\Fortify\Http\Controllers\NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
+// // Reset the Password
+// Route::post('/reset-password', [\Laravel\Fortify\Http\Controllers\NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
